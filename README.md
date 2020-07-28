@@ -14,6 +14,7 @@ graphQl simple chat
 }
 ```
 
+```
 mutation {
   signIn(
     email: "smith123@yahoo.com", 
@@ -22,17 +23,23 @@ mutation {
     id, name, email, password, username
   }
 }
+```
 
+```
 mutation {
   signOut
 }
+```
 
+```
 mutation {
   startChat(title: "Intro to GraphQL", userIds: ["5f18412050b1bb44b08f1ac6"]) {
     id, title
   }
 }
+```
 
+```
 {
   me {
     id
@@ -41,4 +48,5 @@ mutation {
     email
   }
 }
+```
 
