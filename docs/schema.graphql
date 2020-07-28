@@ -1,0 +1,73 @@
+directive @auth on FIELD_DEFINITION
+directive @guest on FIELD_DEFINITION
+directive @cacheControl(
+  maxAge: Int
+  scope: CacheControlScope
+) on FIELD_DEFINITION | OBJECT | INTERFACE
+# Exposes a URL that specifies the behaviour of this scalar.
+directive @specifiedBy(
+  # The URL that specifies the behaviour of this scalar.
+  url: String!
+) on SCALAR
+enum CacheControlScope {
+  PUBLIC
+  PRIVATE
+}
+
+type Chat {
+  id: ID!
+  title: String!
+  users: [User!]!
+  messages: [Message!]!
+  lastMessage: Message
+  createdAt: String!
+  updatedAt: String!
+}
+
+type Message {
+  id: ID!
+  body: String!
+  sender: User!
+  createdAt: String
+  updatedAt: String
+}
+
+type Mutation {
+  _: String
+  signUp(
+    email: String!
+    username: String!
+    name: String!
+    password: String!
+  ): User
+  signIn(email: String!, password: String!): User
+  signOut: Boolean
+  startChat(title: String, userIds: [ID!]!): Chat
+}
+
+type Query {
+  _: String
+  me: User
+  user(id: ID!): User
+  users: [User!]!
+}
+
+type Subscription {
+  _: String
+}
+
+# The `Upload` scalar type
+ represents a file upload.
+scalar Upload
+
+type User {
+  id: ID!
+  email: String!
+  username: String!
+  name: String!
+  password: String
+  chats: [Chat!]!
+  createdAt: String!
+  updatedAt: String!
+}
+
